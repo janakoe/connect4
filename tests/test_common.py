@@ -60,11 +60,11 @@ def test_string_to_board():
         pretty_print_board
 
     board = initialize_game_state()
-    N = 10
-    i = np.random.randint(0, len(board), size=N)
-    j = np.random.randint(0, len(board[0]), size=N)
+    number_pieces = 10
+    i = np.random.randint(0, len(board), size=number_pieces)
+    j = np.random.randint(0, len(board[0]), size=number_pieces)
 
-    for n in range(N):
+    for n in range(number_pieces):
         player = np.random.choice([PLAYER1, PLAYER2])
         board[i[n], j[n]] = player
     print(board)
@@ -79,7 +79,7 @@ def test_string_to_board():
 def test_connected_four():
     from agents.common import connected_four, initialize_game_state
 
-    # perpenticular
+    # perpendicular
     board = initialize_game_state()
     player = np.random.choice([PLAYER1, PLAYER2])
     i = np.random.randint(0, len(board))
@@ -120,5 +120,3 @@ def test_connected_four():
     board[np.arange(i, i-3, -1), np.arange(j, j+3)] = player
     print(board)
     assert not connected_four(board, player, PlayerAction(j))
-
-

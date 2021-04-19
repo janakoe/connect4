@@ -1,6 +1,8 @@
 from enum import Enum
 from typing import Optional
 import numpy as np
+from typing import Callable, Tuple
+
 
 # board[i, j] == PLAYER2 where player 2 (player to move second) has a piece,
 # board[i, j] == PLAYER1 where player 1 (player to move first) has a piece
@@ -24,6 +26,13 @@ class GameState(Enum):
     IS_DRAW = -1
     STILL_PLAYING = 0
 
+class SavedState:
+    pass
+
+GenMove = Callable[
+    [np.ndarray, BoardPiece, Optional[SavedState]],  # Arguments for the generate_move function
+    Tuple[PlayerAction, Optional[SavedState]]  # Return type of the generate_move function
+]
 
 def initialize_game_state() -> np.ndarray:
     """
@@ -124,7 +133,7 @@ def apply_player_action(board: np.ndarray,
 
 def connected_four(board: np.ndarray,
                    player: BoardPiece,
-                   last_action: Optional[PlayerAction] = None) -> bool:
+                   last_action: PlayerAction) -> bool:
     """
     Returns True if there are four adjacent pieces equal to `player` arranged
     in either a horizontal, vertical, or diagonal line. Returns False
@@ -202,12 +211,15 @@ def connected_four(board: np.ndarray,
 
 def check_end_state(board: np.ndarray,
                     player: BoardPiece,
-                    last_action: Optional[PlayerAction] = None,) -> GameState:
+                    last_action: PlayerAction,) -> GameState:
     """
     Returns the current game state for the current `player`, i.e. has their
     last action won (GameState.IS_WIN) or drawn (GameState.IS_DRAW) the game,
     or is play still on-going (GameState.STILL_PLAYING)?
     """
-    if connected_four(board, player, last_action): return GameState.IS_WIN
-    elif np.all(board != NO_PLAYER): return GameState.IS_DRAW
-    else: return GameState.STILL_PLAYING
+    if connected_four(board, player, last_action):
+        return GameState.IS_WIN
+    elif np.all(board != NO_PLAYER):
+        return GameState.IS_DRAW
+    else:
+        return GameState.STILL_PLAYING

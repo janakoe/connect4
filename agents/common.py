@@ -1,7 +1,6 @@
 from enum import Enum
-from typing import Optional
 import numpy as np
-from typing import Callable, Tuple
+from typing import Optional, Callable, Tuple
 
 
 # board[i, j] == PLAYER2 where player 2 (player to move second) has a piece,
@@ -26,13 +25,17 @@ class GameState(Enum):
     IS_DRAW = -1
     STILL_PLAYING = 0
 
+
 class SavedState:
     pass
 
+
+# defines type of function (GenMove) with inputs and outputs
 GenMove = Callable[
     [np.ndarray, BoardPiece, Optional[SavedState]],  # Arguments for the generate_move function
     Tuple[PlayerAction, Optional[SavedState]]  # Return type of the generate_move function
 ]
+
 
 def initialize_game_state() -> np.ndarray:
     """

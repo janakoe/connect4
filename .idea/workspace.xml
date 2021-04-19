@@ -20,11 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f20ee67a-75d5-4ef0-8d03-d94a8f84b0db" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/agents/agent_random/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/agents/agent_random/random.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/agents/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/agents/common.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_common.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +52,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.test">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="connect4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -160,11 +161,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
         <item itemvalue="Python tests.pytest for test_common.test_string_to_board" />
         <item itemvalue="Python tests.pytest for test_common.test_connected_four" />
         <item itemvalue="Python tests.pytest for test_common.test_pretty_print_board" />
         <item itemvalue="Python tests.pytest for test_common.test_initialize_game_state" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -186,22 +187,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1618827286875" />
-    <state width="1259" height="2" key="GridCell.Tab.0.bottom" timestamp="1618828207068">
+    <state width="1259" height="19" key="GridCell.Tab.0.bottom" timestamp="1618834287580">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="2" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1618828207068" />
-    <state width="1259" height="2" key="GridCell.Tab.0.center" timestamp="1618828207068">
+    <state width="1259" height="19" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1618834287580" />
+    <state width="1259" height="19" key="GridCell.Tab.0.center" timestamp="1618834287580">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="2" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1618828207068" />
-    <state width="1259" height="2" key="GridCell.Tab.0.left" timestamp="1618828207068">
+    <state width="1259" height="19" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1618834287580" />
+    <state width="1259" height="19" key="GridCell.Tab.0.left" timestamp="1618834287580">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="2" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1618828207068" />
-    <state width="1259" height="2" key="GridCell.Tab.0.right" timestamp="1618828207068">
+    <state width="1259" height="19" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1618834287580" />
+    <state width="1259" height="19" key="GridCell.Tab.0.right" timestamp="1618834287580">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="2" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1618828207068" />
+    <state width="1259" height="19" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1618834287580" />
     <state x="110" y="204" key="SettingsEditor" timestamp="1618771603339">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -210,16 +211,5 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1618761507811" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>17</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

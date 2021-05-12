@@ -3,8 +3,8 @@ import numpy as np
 from typing import Optional, Callable, Tuple
 
 
-# board[i, j] == PLAYER2 where player 2 (player to move second) has a piece,
-# board[i, j] == PLAYER1 where player 1 (player to move first) has a piece
+# board[i, j] == PLAYER2 where max_player 2 (max_player to move second) has a piece,
+# board[i, j] == PLAYER1 where max_player 1 (max_player to move first) has a piece
 # board[i, j] == NO_PLAYER where the position is empty
 
 BoardPiece = np.int8  # The data type (dtype) of the board
@@ -117,45 +117,48 @@ def apply_player_action(board: np.ndarray,
                         player: BoardPiece,
                         copy: bool = False) -> np.ndarray:
     """
-    Sets board[i, action] = player, where i is the lowest open row.
+    Sets board[i, action] = max_player, where i is the lowest open row.
     The modified board is returned.
     If copy is True, makes a copy of the board before modifying it.
     """
 
     if copy:
-        board_copy = np.copy(board)
+        board = board.copy()
 
     for row in board:
         if row[action] == NO_PLAYER:
             row[action] = player
             return board
 
-    print('action not possible')
+    print(f'action {action} not possible')
     return board
 
 
 def connected_four(board: np.ndarray,
                    player: BoardPiece,
-                   last_action: PlayerAction) -> bool:
+                   last_action: PlayerAction,
+                   n: int = 4) -> bool:
     """
-    Returns True if there are four adjacent pieces equal to `player` arranged
+    Returns True if there are four adjacent pieces equal to `max_player` arranged
     in either a horizontal, vertical, or diagonal line. Returns False
     otherwise. If desired, the last action taken (i.e. last column played)
     can be provided for potential speed optimisation.
     """
 
-    max_row = 6
-    max_column = 7
+    max_row = board.shape[0]
+    max_column = board.shape[1]
 
     last_row = 0
 
+    # find last row
     for i in range(1, max_row+1):
         if board[max_row-i, last_action] == player:
             last_row = max_row-i
             break
 
     max_connect = 0
-    # check perpendicular
+
+    # check vertical
     if last_row-3 >= 0:
         for i in range(1, last_row+1):
             if board[last_row-i, last_action] != player: break
@@ -186,7 +189,8 @@ def connected_four(board: np.ndarray,
         if board[last_row-i, last_action-i] != player: break
         else:
             i += 1
-            if i == 4: return True
+            max_connect += 1
+            if max_connect == 3: return True
 
     for j in range(1, min(max_row-last_row, max_column-last_action)):
         if board[last_row+j, last_action+j] != player: break
@@ -204,19 +208,164 @@ def connected_four(board: np.ndarray,
             i += 1
             if max_connect == 3: return True
 
-    for j in range(1, min(max_row-last_row, max_column+1)):
+    for j in range(1, min(max_row-last_row, last_action+1)):
         if board[last_row+j, last_action-j] != player: break
         else:
             max_connect += 1
             j += 1
             if max_connect == 3: return True
 
+    return False
+
+
+def connected_n(board: np.ndarray,
+                player: BoardPiece,
+                last_action: PlayerAction,
+                n: int = 4) -> bool:
+    """
+    Returns True if there are four adjacent pieces equal to `max_player` arranged
+    in either a horizontal, vertical, or diagonal line. Returns False
+    otherwise. If desired, the last action taken (i.e. last column played)
+    can be provided for potential speed optimisation.
+    """
+    count = 0
+    max_row = board.shape[0]
+    max_column = board.shape[1]
+    n_connected = n
+    max_connected = 4
+    n_empty = max_connected - n_connected
+    last_row = 0
+
+    # find last row
+    for i in range(1, max_row+1):
+        if board[max_row-i, last_action] == player:
+            last_row = max_row-i
+            break
+
+    connected = 1
+    # check vertical
+    if last_row - n_connected >= 0:
+        for i in range(1, last_row+1):
+            if board[last_row-i, last_action] != player:
+                break
+            if i <= (max_connected - n_connected):
+                if last_row+i >= max_row:
+                    break
+            else:
+                connected += 1
+                i += 1
+                if connected == n_connected:
+                    count += 1
+
+    # check horizontal
+    connected = 1
+    empty = 0
+
+    for i in range(1, min(last_action+1, max_connected)):
+        if board[last_row, last_action-i] == player:
+            connected += 1
+            i += 1
+        elif board[last_row, last_action-i] == NO_PLAYER:
+            if empty >= n_empty:
+                break
+            empty += 1
+            i += 1
+        else:
+            break
+    if (connected == n_connected) & (empty == n_empty):
+        count += 1
+
+    for j in range(1, max_column-last_action):
+        if board[last_row, last_action+j] == player:
+            connected += 1
+            if (connected == n_connected) & (empty == n_empty):
+                count += 1
+            j += 1
+        elif board[last_row, last_action+j] == NO_PLAYER:
+            if empty >= n_empty:
+                break
+            empty += 1
+            if (connected == n_connected) & (empty == n_empty):
+                count += 1
+            j += 1
+        else:
+            break
+
+    # check diagonal same direction
+    connected = 1
+    empty = 0
+    for i in range(1, min(max_connected, min(last_row, last_action)+1)):
+        if board[last_row-i, last_action-i] == player:
+            i += 1
+            connected += 1
+        elif board[last_row-i, last_action-i] == NO_PLAYER:
+            if empty >= n_empty:
+                break
+            i += 1
+            empty += 1
+        else:
+            break
+
+    if (connected == n_connected) & (empty == n_empty):
+        count += 1
+
+    for j in range(1, min(max_row-last_row, max_column-last_action)):
+        if board[last_row+j, last_action+j] == player:
+            connected += 1
+            if connected == n_connected & empty == n_empty:
+                count += 1
+            j += 1
+        elif board[last_row+j, last_action+j] == NO_PLAYER:
+            if empty >= n_empty:
+                break
+            empty += 1
+            j += 1
+            if (connected == n_connected) & (empty == n_empty):
+                count += 1
+        else:
+            break
+
+    # check diagonal different direction
+    connected = 1
+    empty = 0
+    for i in range(1, min(last_row+1, max_column-last_action)):
+        if board[last_row-i, last_action+i] == player:
+            i += 1
+            connected += 1
+        elif board[last_row-i, last_action+i] == NO_PLAYER:
+            if empty >= n_empty:
+                break
+            i += 1
+            empty += 1
+        else:
+            break
+
+    if (connected == n_connected) & (empty == n_empty):
+        count += 1
+
+    for j in range(1, min(max_row-last_row, last_action+1)):
+        if board[last_row+j, last_action-j] == player:
+            connected += 1
+            if (connected == n_connected) & (empty == n_empty):
+                count += 1
+            j += 1
+        elif board[last_row+j, last_action-j] == NO_PLAYER:
+            if empty >= n_empty:
+                break
+            empty += 1
+            j += 1
+            if (connected == n_connected) & (empty == n_empty):
+                count += 1
+        else:
+            break
+
+    return count
 
 def check_end_state(board: np.ndarray,
                     player: BoardPiece,
                     last_action: PlayerAction,) -> GameState:
     """
-    Returns the current game state for the current `player`, i.e. has their
+    Returns the current game state for the current `max_player`, i.e. has their
     last action won (GameState.IS_WIN) or drawn (GameState.IS_DRAW) the game,
     or is play still on-going (GameState.STILL_PLAYING)?
     """
@@ -226,3 +375,29 @@ def check_end_state(board: np.ndarray,
         return GameState.IS_DRAW
     else:
         return GameState.STILL_PLAYING
+
+
+import timeit
+number = 10**4
+str_4_diag = '|=============|\n' \
+                  '|X            |\n' \
+                  '|X            |\n' \
+                  '|O   X O X   X|\n' \
+                  '|X   O O O   O|\n' \
+                  '|X X O X O   X|\n' \
+                  '|X O X O O O X|\n' \
+                  '|=============|\n' \
+                  '|0 1 2 3 4 5 6|'
+
+board_test_4 = string_to_board(str_4_diag)
+board = initialize_game_state()
+board[0,0] = PLAYER2
+res = timeit.timeit("connected_four(board, player, last_action)",
+                    setup="connected_four(board, player, last_action)",
+                    number=number,
+                    globals=dict(connected_four=connected_four,
+                                 board=board_test_4,
+                                 player=PLAYER2,
+                                 last_action=0))
+
+print(f"Python iteration-based: {res/number*1e6 : .1f} us per call")

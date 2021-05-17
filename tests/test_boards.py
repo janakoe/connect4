@@ -1,4 +1,5 @@
-from agents.common import string_to_board
+from agents.common import string_to_board, connected_n, PLAYER1, PlayerAction
+
 
 class TestBoards:
     # test connected_four
@@ -20,26 +21,18 @@ class TestBoards:
     # test connected_n : n=3
     # boards == True
     # last_action = 1, player=X
-    str_3_diag = '|=============|\n' \
-                 '|             |\n' \
-                 '|X            |\n' \
-                 '|O           X|\n' \
-                 '|X   X       O|\n' \
-                 '|X X O X O   X|\n' \
-                 '|X O X O O O X|\n' \
-                 '|=============|\n' \
-                 '|0 1 2 3 4 5 6|'
 
-    board_3_diag = string_to_board(str_3_diag)
-    # true: last_action = 0, player = X
-    # true: last_action = 3, player = 0
-    # true: last_action = 5, player = 0
+
+
+    # true: last_action = 0, player1  (X)
+    # true: last_action = 3, player2  (O)
+    # true: last_action = 5, player2
 
     str_3_1 = '|=============|\n' \
               '|             |\n' \
               '|             |\n' \
               '|             |\n' \
-              '|    X O      |\n' \
+              '|X   X O      |\n' \
               '|X   O X O    |\n' \
               '|X O X O O O  |\n' \
               '|=============|\n' \
@@ -47,7 +40,6 @@ class TestBoards:
 
     board_3_1 = string_to_board(str_3_1)
 
-    # boards = False
 
     # false: last_action = 5, player = O
     # false: last_action = 1, player = X
@@ -56,7 +48,7 @@ class TestBoards:
     str_3_2 = '|=============|\n' \
               '|             |\n' \
               '|X            |\n' \
-              '|O     O      X|\n' \
+              '|O     O     X|\n' \
               '|X   X X     O|\n' \
               '|X X O X O   X|\n' \
               '|X O X O O O X|\n' \
@@ -77,13 +69,14 @@ class TestBoards:
 
     board_valid_move = string_to_board(str_valid_move)
 
+
     heuristic_1 = '|=============|\n' \
                   '|             |\n' \
                   '|             |\n' \
                   '|             |\n' \
-                  '|             |\n' \
-                  '|O            |\n' \
-                  '|X            |\n' \
+                  '|O   X        |\n' \
+                  '|O X X   O X  |\n' \
+                  '|X O X O X O  |\n' \
                   '|=============|\n' \
                   '|0 1 2 3 4 5 6|'
 
@@ -93,34 +86,58 @@ class TestBoards:
                   '|             |\n' \
                   '|             |\n' \
                   '|             |\n' \
-                  '|             |\n' \
-                  '|             |\n' \
-                  '|X     O      |\n' \
+                  '|            O|\n' \
+                  '|O           X|\n' \
+                  '|X O   O   X X|\n' \
                   '|=============|\n' \
                   '|0 1 2 3 4 5 6|'
 
     board_heuristic_2 = string_to_board(heuristic_2)
 
-    heuristic_3 = '|=============|\n' \
+    evaluate_1 =  '|=============|\n' \
                   '|             |\n' \
                   '|             |\n' \
                   '|             |\n' \
-                  '|             |\n' \
-                  '|      O      |\n' \
-                  '|    X X      |\n' \
+                  '|O       X    |\n' \
+                  '|O X X   O X  |\n' \
+                  '|X O X O X O  |\n' \
                   '|=============|\n' \
                   '|0 1 2 3 4 5 6|'
 
-    board_heuristic_3 = string_to_board(heuristic_3)
+    board_evaluate_1 = string_to_board(evaluate_1)
 
-    heuristic_4 = '|=============|\n' \
-                  '|             |\n' \
-                  '|             |\n' \
-                  '|             |\n' \
-                  '|             |\n' \
-                  '|      X      |\n' \
-                  '|X     O      |\n' \
-                  '|=============|\n' \
-                  '|0 1 2 3 4 5 6|'
+    minimax_depth2 =  '|=============|\n' \
+                      '|             |\n' \
+                      '|             |\n' \
+                      '|             |\n' \
+                      '|             |\n' \
+                      '|            X|\n' \
+                      '|    O O     X|\n' \
+                      '|=============|\n' \
+                      '|0 1 2 3 4 5 6|'
 
-    board_heuristic_4 = string_to_board(heuristic_4)
+    board_minimax_depth2 = string_to_board(minimax_depth2)
+
+    minimax_2 =  '|=============|\n' \
+                      '|             |\n' \
+                      '|             |\n' \
+                      '|             |\n' \
+                      '|             |\n' \
+                      '|    O O O X X|\n' \
+                      '|X O O O X X X|\n' \
+                      '|=============|\n' \
+                      '|0 1 2 3 4 5 6|'
+
+    board_minimax_2 = string_to_board(minimax_2)
+
+    minimax_3 = '|=============|\n' \
+                '|             |\n' \
+                '|             |\n' \
+                '|             |\n' \
+                '|             |\n' \
+                '|      O      |\n' \
+                '|      X X    |\n' \
+                '|=============|\n' \
+                '|0 1 2 3 4 5 6|'
+
+    board_minimax_3 = string_to_board(minimax_3)

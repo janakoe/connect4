@@ -1,7 +1,8 @@
 from enum import Enum
 import numpy as np
 from typing import Optional, Callable, Tuple
-
+from numba import njit
+import timeit
 
 # board[i, j] == PLAYER2 where max_player 2 (max_player to move second) has a piece,
 # board[i, j] == PLAYER1 where max_player 1 (max_player to move first) has a piece
@@ -94,7 +95,6 @@ def string_to_board(pp_board: str) -> np.ndarray:
 
     pp_board = pp_board[len(top):(len(pp_board)-len(bottom))-1]
     pp_board = np.array(pp_board.split('\n'))
-    print(pp_board)
 
     board_print = np.empty((6, 7), dtype=BoardPiecePrint)
 
@@ -133,7 +133,7 @@ def apply_player_action(board: np.ndarray,
     print(f'action {action} not possible')
     return board
 
-
+@njit()
 def connected_four(board: np.ndarray,
                    player: BoardPiece,
                    last_action: PlayerAction,
@@ -218,6 +218,7 @@ def connected_four(board: np.ndarray,
     return False
 
 
+@njit()
 def connected_n(board: np.ndarray,
                 player: BoardPiece,
                 last_action: PlayerAction,
@@ -244,13 +245,10 @@ def connected_n(board: np.ndarray,
 
     connected = 1
     # check vertical
-    if last_row - n_connected >= 0:
+    if (last_row - n_connected >= -1) & (last_row + n_empty < max_row):
         for i in range(1, last_row+1):
             if board[last_row-i, last_action] != player:
                 break
-            if i <= (max_connected - n_connected):
-                if last_row+i >= max_row:
-                    break
             else:
                 connected += 1
                 i += 1
@@ -294,7 +292,7 @@ def connected_n(board: np.ndarray,
     # check diagonal same direction
     connected = 1
     empty = 0
-    for i in range(1, min(max_connected, min(last_row, last_action)+1)):
+    for i in range(1, min(last_row, last_action)+1):
         if board[last_row-i, last_action-i] == player:
             i += 1
             connected += 1
@@ -312,7 +310,7 @@ def connected_n(board: np.ndarray,
     for j in range(1, min(max_row-last_row, max_column-last_action)):
         if board[last_row+j, last_action+j] == player:
             connected += 1
-            if connected == n_connected & empty == n_empty:
+            if (connected == n_connected) & (empty == n_empty):
                 count += 1
             j += 1
         elif board[last_row+j, last_action+j] == NO_PLAYER:
@@ -377,27 +375,4 @@ def check_end_state(board: np.ndarray,
         return GameState.STILL_PLAYING
 
 
-import timeit
-number = 10**4
-str_4_diag = '|=============|\n' \
-                  '|X            |\n' \
-                  '|X            |\n' \
-                  '|O   X O X   X|\n' \
-                  '|X   O O O   O|\n' \
-                  '|X X O X O   X|\n' \
-                  '|X O X O O O X|\n' \
-                  '|=============|\n' \
-                  '|0 1 2 3 4 5 6|'
 
-board_test_4 = string_to_board(str_4_diag)
-board = initialize_game_state()
-board[0,0] = PLAYER2
-res = timeit.timeit("connected_four(board, player, last_action)",
-                    setup="connected_four(board, player, last_action)",
-                    number=number,
-                    globals=dict(connected_four=connected_four,
-                                 board=board_test_4,
-                                 player=PLAYER2,
-                                 last_action=0))
-
-print(f"Python iteration-based: {res/number*1e6 : .1f} us per call")

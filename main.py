@@ -22,6 +22,11 @@ def user_move(board: np.ndarray,
                   "try entering an integer.")
     return action, saved_state
 
+    import time
+    from agents.common import PLAYER1, PLAYER2, PLAYER1_PRINT, PLAYER2_PRINT, \
+        GameState
+    from agents.common import initialize_game_state, pretty_print_board, \
+        apply_player_action, check_end_state
 
 def human_vs_agent(generate_move_1: GenMove,
                    generate_move_2: GenMove = user_move,
@@ -76,6 +81,11 @@ def human_vs_agent(generate_move_1: GenMove,
                     playing = False
                     break
 
+        saved_state = {PLAYER1: None, PLAYER2: None}
+        board = initialize_game_state()
+        gen_moves = (generate_move_1, generate_move_2)[::play_first]
+        player_names = (player_1, player_2)[::play_first]
+        gen_args = (args_1, args_2)[::play_first]
 
 if __name__ == "__main__":
     # human vs human

@@ -62,7 +62,8 @@ def human_vs_agent(generate_move_1: GenMove,
                 t0 = time.time()
                 print(pretty_print_board(board))
                 print(
-                    f'{player_name} you are playing with {PLAYER1_PRINT if player == PLAYER1 else PLAYER2_PRINT}'
+                    f'{player_name} you are playing with '
+                    f'{PLAYER1_PRINT if player == PLAYER1 else PLAYER2_PRINT}'
                 )
                 action, saved_state[player] = gen_move(
                     board.copy(), player, saved_state[player], *args

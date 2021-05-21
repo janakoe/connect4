@@ -28,8 +28,11 @@
     <list default="true" id="f20ee67a-75d5-4ef0-8d03-d94a8f84b0db" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/agents/agent_minimax/minimax.py" beforeDir="false" afterPath="$PROJECT_DIR$/agents/agent_minimax/minimax.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agents/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/agents/common.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/agent_minimax/test_minimax.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/agent_minimax/test_minimax.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_boards.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_boards.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_common.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_common.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +65,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python tests.pytest in test_common.py">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="connect4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -105,51 +108,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_minimax.test_evaluate" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_common.test_apply_player_action" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="connect4" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agent_minimax" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_minimax.test_evaluate&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test_minimax.test_evaluate_min" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="connect4" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agent_minimax" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_minimax.test_evaluate_min&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test_minimax.test_heuristic" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="connect4" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agent_minimax" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_minimax.test_heuristic&quot;" />
+      <option name="_new_target" value="&quot;test_common.test_apply_player_action&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -169,13 +140,45 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="pytest in test_common.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="connect4" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_common.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest in test_minimax.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="connect4" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agent_minimax" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/agent_minimax/test_minimax.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.pytest in test_common.py" />
+        <item itemvalue="Python tests.pytest for test_common.test_apply_player_action" />
+        <item itemvalue="Python tests.pytest in test_minimax.py" />
         <item itemvalue="Python.minimax" />
         <item itemvalue="Python tests.pytest for test_minimax.test_minimax" />
-        <item itemvalue="Python tests.pytest for test_minimax.test_evaluate" />
-        <item itemvalue="Python tests.pytest for test_minimax.test_evaluate_min" />
-        <item itemvalue="Python tests.pytest for test_minimax.test_heuristic" />
       </list>
     </recent_temporary>
   </component>
@@ -206,7 +209,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="alpha beta pruning, heuristic count n_connected, depth 8" />
-    <option name="LAST_COMMIT_MESSAGE" value="alpha beta pruning, heuristic count n_connected, depth 8" />
+    <MESSAGE value="docstrings and minor changes 19.05" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="WindowStateProjectService">
     <state x="233" y="0" key="#Intentions" timestamp="1620846348063">
@@ -221,26 +225,26 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1619425248334" />
-    <state width="1259" height="124" key="GridCell.Tab.0.bottom" timestamp="1621457432361">
+    <state width="1259" height="244" key="GridCell.Tab.0.bottom" timestamp="1621605612247">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="302" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1621285218098" />
-    <state width="1259" height="124" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1621457432361" />
-    <state width="1259" height="124" key="GridCell.Tab.0.center" timestamp="1621457432361">
+    <state width="1259" height="244" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1621605612247" />
+    <state width="1259" height="244" key="GridCell.Tab.0.center" timestamp="1621605612247">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="302" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1621285218098" />
-    <state width="1259" height="124" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1621457432361" />
-    <state width="1259" height="124" key="GridCell.Tab.0.left" timestamp="1621457432361">
+    <state width="1259" height="244" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1621605612247" />
+    <state width="1259" height="244" key="GridCell.Tab.0.left" timestamp="1621605612247">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="302" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1621285218098" />
-    <state width="1259" height="124" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1621457432361" />
-    <state width="1259" height="124" key="GridCell.Tab.0.right" timestamp="1621457432361">
+    <state width="1259" height="244" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1621605612247" />
+    <state width="1259" height="244" key="GridCell.Tab.0.right" timestamp="1621605612247">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="302" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1621285218098" />
-    <state width="1259" height="124" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1621457432361" />
+    <state width="1259" height="244" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1621605612247" />
     <state width="1259" height="88" key="GridCell.Tab.1.bottom" timestamp="1621255237505">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -261,19 +265,19 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="110" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1621457813053" />
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1621285211442">
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1621457915046">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1621285211442" />
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1620811319160" />
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1621457915046" />
     <state x="303" y="155" key="run.anything.popup" timestamp="1621259363268">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="303" y="155" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1621259363268" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1620639719249">
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1621602428906">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1620639719249" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1621602428906" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

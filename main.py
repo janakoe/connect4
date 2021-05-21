@@ -4,6 +4,7 @@ from agents.common import PlayerAction, BoardPiece, SavedState, GenMove
 from agents.agent_random import generate_move_random
 from agents.agent_minimax import generate_move
 
+
 def user_move(board: np.ndarray,
               _player: BoardPiece,
               saved_state: Optional[SavedState]) -> (PlayerAction,
@@ -22,11 +23,6 @@ def user_move(board: np.ndarray,
                   "try entering an integer.")
     return action, saved_state
 
-    import time
-    from agents.common import PLAYER1, PLAYER2, PLAYER1_PRINT, PLAYER2_PRINT, \
-        GameState
-    from agents.common import initialize_game_state, pretty_print_board, \
-        apply_player_action, check_end_state
 
 def human_vs_agent(generate_move_1: GenMove,
                    generate_move_2: GenMove = user_move,
@@ -91,4 +87,13 @@ def human_vs_agent(generate_move_1: GenMove,
 if __name__ == "__main__":
     # human vs human
     #human_vs_agent(user_move)
+
+    # human vs random agent
+    # human_vs_agent(generate_move_random)
+
+    # human vs minimax
     human_vs_agent(generate_move)
+
+    # minimax vs minimax
+    # human_vs_agent(generate_move, generate_move)
+

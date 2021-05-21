@@ -2,31 +2,21 @@ from agents.common import string_to_board, connected_n, PLAYER1, PlayerAction
 
 
 class TestBoards:
-    # test connected_four
-    # boards == True:
+    """
+    Generates example boards for the tests
+    """
 
-    # boards == False
     str_4_1 = '|=============|\n' \
-                  '|X            |\n' \
-                  '|X            |\n' \
-                  '|O   X O X   X|\n' \
-                  '|X   O O O   O|\n' \
-                  '|X X O X O   X|\n' \
-                  '|X O X O O O X|\n' \
-                  '|=============|\n' \
-                  '|0 1 2 3 4 5 6|'
+              '|X            |\n' \
+              '|X            |\n' \
+              '|O   X O X   X|\n' \
+              '|X   O O O   O|\n' \
+              '|X X O X O   X|\n' \
+              '|X O X O O O X|\n' \
+              '|=============|\n' \
+              '|0 1 2 3 4 5 6|'
 
     board_test_4 = string_to_board(str_4_1)
-
-    # test connected_n : n=3
-    # boards == True
-    # last_action = 1, player=X
-
-
-
-    # true: last_action = 0, player1  (X)
-    # true: last_action = 3, player2  (O)
-    # true: last_action = 5, player2
 
     str_3_1 = '|=============|\n' \
               '|             |\n' \
@@ -39,11 +29,6 @@ class TestBoards:
               '|0 1 2 3 4 5 6|'
 
     board_3_1 = string_to_board(str_3_1)
-
-
-    # false: last_action = 5, player = O
-    # false: last_action = 1, player = X
-    # true: last_action = 2, player = X
 
     str_3_2 = '|=============|\n' \
               '|             |\n' \
@@ -118,15 +103,15 @@ class TestBoards:
 
     board_minimax_depth2 = string_to_board(minimax_depth2)
 
-    minimax_2 =  '|=============|\n' \
-                      '|             |\n' \
-                      '|             |\n' \
-                      '|             |\n' \
-                      '|             |\n' \
-                      '|    O O O X X|\n' \
-                      '|X O O O X X X|\n' \
-                      '|=============|\n' \
-                      '|0 1 2 3 4 5 6|'
+    minimax_2 = '|=============|\n' \
+                  '|             |\n' \
+                  '|             |\n' \
+                  '|             |\n' \
+                  '|             |\n' \
+                  '|    O O O X X|\n' \
+                  '|X O O O X X X|\n' \
+                  '|=============|\n' \
+                  '|0 1 2 3 4 5 6|'
 
     board_minimax_2 = string_to_board(minimax_2)
 

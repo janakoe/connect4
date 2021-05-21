@@ -1,6 +1,7 @@
 import numpy as np
 from agents.common import BoardPiece, SavedState, PlayerAction, \
-    apply_player_action, connected_four, NO_PLAYER, PLAYER1, PLAYER2, connected_n
+    apply_player_action, connected_four, NO_PLAYER, PLAYER1, PLAYER2, \
+    connected_n
 from typing import Tuple, Optional
 
 MaxMin = np.int8

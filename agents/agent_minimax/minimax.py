@@ -1,7 +1,7 @@
 import numpy as np
 from agents.common import BoardPiece, SavedState, PlayerAction, \
     apply_player_action, connected_four, NO_PLAYER, PLAYER1, PLAYER2, \
-    connected_n
+    connected_n, change_player
 from typing import Tuple, Optional
 
 MaxMin = np.int8
@@ -193,24 +193,6 @@ def min_player_move(board: np.ndarray, min_player: BoardPiece, depth: int,
 
     return min_score, PlayerAction(player_action)
 
-
-def change_player(player: BoardPiece) -> BoardPiece:
-    """
-    Changes the player and returns the new player
-    Parameters
-    ----------
-    player: BoardPiece
-        current player (player one or two)
-
-    Returns
-    -------
-    BoardPiece
-        new player
-    """
-
-    if player == PLAYER1:
-        return PLAYER2
-    return PLAYER1
 
 
 def heuristic(board: np.ndarray,

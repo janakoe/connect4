@@ -1,0 +1,38 @@
+import numpy as np
+
+from agents.common import NO_PLAYER, PLAYER1, \
+    PLAYER2, initialize_game_state, PlayerAction, \
+    PLAYER2_PRINT, PLAYER1_PRINT
+
+
+def test_generate_move():
+    from agents.agent_montecarlo import generate_move
+
+    assert NotImplementedError
+
+
+
+def test_select():
+    from agents.agent_montecarlo import MonteCarlo
+    # select maximal child
+
+
+    #MonteCarlo.select()
+
+raise NotImplementedError
+
+    # phase 2 - Expansion: Expand a random unexpanded child node
+def test_expansion():
+    from agents.agent_montecarlo import MonteCarlo
+    raise NotImplementedError
+
+# phase 3 - Simulation: Play game to terminal state, return winner
+def test_simulation():
+    from agents.agent_montecarlo import MonteCarlo
+    raise NotImplementedError
+
+# phase 4 - Backpropagation: Update ancestor statistics
+def test_backprop(node, winner):
+    from agents.agent_montecarlo import MonteCarlo
+
+    raise NotImplementedError

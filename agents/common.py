@@ -428,7 +428,7 @@ def check_end_state(board: np.ndarray,
     """
     Returns the current game state for the current `max_player`, i.e. has their
     last action won (GameState.IS_WIN) or drawn (GameState.IS_DRAW) the game,
-    or is play still on-going (GameState.STILL_PLAYING)?
+    or is last_action still on-going (GameState.STILL_PLAYING)?
 
     Parameters
     ----------
@@ -449,3 +449,26 @@ def check_end_state(board: np.ndarray,
         return GameState.IS_DRAW
     else:
         return GameState.STILL_PLAYING
+
+
+def valid_action(board: np.ndarray):
+    return np.argwhere(board[-1, :] == NO_PLAYER).flatten()
+
+
+def change_player(player: BoardPiece) -> BoardPiece:
+    """
+    Changes the player and returns the new player
+    Parameters
+    ----------
+    player: BoardPiece
+        current player (player one or two)
+
+    Returns
+    -------
+    BoardPiece
+        new player
+    """
+
+    if player == PLAYER1:
+        return PLAYER2
+    return PLAYER1

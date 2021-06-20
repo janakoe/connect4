@@ -202,3 +202,14 @@ def test_connected_n():
     assert connected_n(board, PLAYER2, PlayerAction(5), n) == 0
     assert connected_n(board, PLAYER1, PlayerAction(1), n) == 0
     assert connected_n(board, PLAYER1, PlayerAction(2), n) == 2
+
+
+def test_legal_moves():
+    from agents.common import get_legal_moves, initialize_game_state
+
+    board = initialize_game_state()
+    moves = np.arange(0, 7)
+    assert np.all(get_legal_moves(board) == moves)
+
+    # board = TestBoards.board_legal_moves
+    # assert get_legal_moves(board) == np.delete(moves, 2)

@@ -159,7 +159,8 @@ def apply_player_action(board: np.ndarray,
         if row[action] == NO_PLAYER:
             row[action] = player
             return board
-        
+
+    print(pretty_print_board(board))
     raise NameError(f'action {action} not possible')
 
 
@@ -194,6 +195,9 @@ def connected_four(board: np.ndarray,
     max_column = board.shape[1]
 
     last_row = 0
+
+    if last_action is None:
+        return False
 
     # find last row
     for i in range(1, max_row+1):
@@ -451,10 +455,6 @@ def check_end_state(board: np.ndarray,
         return GameState.STILL_PLAYING
 
 
-def valid_action(board: np.ndarray):
-    return np.argwhere(board[-1, :] == NO_PLAYER).flatten()
-
-
 def change_player(player: BoardPiece) -> BoardPiece:
     """
     Changes the player and returns the new player
@@ -472,3 +472,13 @@ def change_player(player: BoardPiece) -> BoardPiece:
     if player == PLAYER1:
         return PLAYER2
     return PLAYER1
+
+
+def valid_action(board: np.ndarray,
+                 player: BoardPiece,
+                 last_action: PlayerAction):
+
+    #if not connected_four(board, player, last_action):
+    return np.argwhere(board[-1, :] == NO_PLAYER).flatten()
+
+    #return []

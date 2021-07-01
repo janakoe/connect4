@@ -19,15 +19,15 @@ def user_move(board: np.ndarray,
     while not 0 <= action < board.shape[1]:
         try:
             action = PlayerAction(input("Column? "))
-            saved_state[2] = action
-            print('saved state at end of user turn: ', saved_state)
-            print('player1: ', saved_state[_player],
-                  'player2: ', saved_state[change_player(_player)])
+
+            print('user: player ', _player, 'action: ', action)
+            #print('player1: ', saved_state[_player],
+            #      'player2: ', saved_state[change_player(_player)])
 
         except ValueError:
             print("Input could not be converted to the dtype PlayerAction, "
                   "try entering an integer.")
-    return action, saved_state[_player]
+    return action, action
 
 
 def human_vs_agent(generate_move_1: GenMove,

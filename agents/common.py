@@ -428,11 +428,11 @@ def connected_n(board: np.ndarray,
 
 def check_end_state(board: np.ndarray,
                     player: BoardPiece,
-                    last_action: PlayerAction,) -> GameState:
+                    last_action: PlayerAction) -> GameState:
     """
-    Returns the current game state for the current `max_player`, i.e. has their
-    last action won (GameState.IS_WIN) or drawn (GameState.IS_DRAW) the game,
-    or is last_action still on-going (GameState.STILL_PLAYING)?
+    Returns the current game state for the current `max_player`, i.e. did their
+    last action lead to a win (GameState.IS_WIN) or drawn (GameState.IS_DRAW)
+    or is the game still on-going (GameState.STILL_PLAYING)
 
     Parameters
     ----------
@@ -474,11 +474,6 @@ def change_player(player: BoardPiece) -> BoardPiece:
     return PLAYER1
 
 
-def valid_action(board: np.ndarray,
-                 player: BoardPiece,
-                 last_action: PlayerAction):
-
-    #if not connected_four(board, player, last_action):
+def valid_action(board: np.ndarray):
     return np.argwhere(board[-1, :] == NO_PLAYER).flatten()
 
-    #return []

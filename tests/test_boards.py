@@ -126,3 +126,27 @@ class TestBoards:
                 '|0 1 2 3 4 5 6|'
 
     board_minimax_3 = string_to_board(minimax_3)
+
+    str_drawn = '|=============|\n' \
+                '|O X O X      |\n' \
+                '|O X O X X O O|\n' \
+                '|O X O O X X X|\n' \
+                '|X O X X O O O|\n' \
+                '|X X O X O X X|\n' \
+                '|X O X O O O X|\n' \
+                '|=============|\n' \
+                '|0 1 2 3 4 5 6|'
+
+    board_drawn = string_to_board(str_drawn)
+
+    str_win_player1 = '|=============|\n' \
+                      '|O X X X      |\n' \
+                      '|O X O X X X O|\n' \
+                      '|O X O O X X X|\n' \
+                      '|X O X X O X O|\n' \
+                      '|X X O X O O X|\n' \
+                      '|X O X O O O X|\n' \
+                      '|=============|\n' \
+                      '|0 1 2 3 4 5 6|'
+
+    board_win_player1 = string_to_board(str_win_player1)

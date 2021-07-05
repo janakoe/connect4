@@ -1,8 +1,8 @@
 import numpy as np
 from typing import Optional, Callable
-from agents.common import PlayerAction, BoardPiece, SavedState, GenMove, change_player
-from agents.agent_random import generate_move_random
-#from agents.agent_minimax import generate_move
+from agents.common import PlayerAction, BoardPiece, SavedState, GenMove
+# from agents.agent_random import generate_move_random
+# from agents.agent_minimax import generate_move
 from agents.agent_montecarlo import generate_move
 
 
@@ -19,10 +19,6 @@ def user_move(board: np.ndarray,
     while not 0 <= action < board.shape[1]:
         try:
             action = PlayerAction(input("Column? "))
-
-            print('user: player ', _player, 'action: ', action)
-            #print('player1: ', saved_state[_player],
-            #      'player2: ', saved_state[change_player(_player)])
 
         except ValueError:
             print("Input could not be converted to the dtype PlayerAction, "
@@ -90,9 +86,10 @@ def human_vs_agent(generate_move_1: GenMove,
         player_names = (player_1, player_2)[::play_first]
         gen_args = (args_1, args_2)[::play_first]
 
+
 if __name__ == "__main__":
     # human vs human
-    #human_vs_agent(user_move)
+    # human_vs_agent(user_move)
 
     # human vs random agent
     # human_vs_agent(generate_move_random)

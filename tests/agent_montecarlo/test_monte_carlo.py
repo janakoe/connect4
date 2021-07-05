@@ -1,27 +1,9 @@
 import numpy as np
-
-from agents.common import NO_PLAYER, PLAYER1, \
-    PLAYER2, initialize_game_state, PlayerAction, \
-    PLAYER2_PRINT, PLAYER1_PRINT, valid_action, BoardPiece, connected_four
-import time
-from tests.test_trees import TestTrees
+from agents.common import NO_PLAYER, PLAYER1, PLAYER2, \
+    initialize_game_state, PlayerAction, BoardPiece
 from tests.test_boards import TestBoards
-
 import tests.test_trees as tt
-
 from agents.agent_montecarlo.monte_carlo import MonteCarlo
-
-#def test_generate_move():
- #   from agents.agent_montecarlo import generate_move
-
-    # test if move is generated
-    # test if move is valid
-    # test if takes the win if possible
-    # TODO: optimization - break if win
-
-    # test if doesnt loose?
-
-    #assert NotImplementedError
 
 
 def test_init():
@@ -61,7 +43,6 @@ def test_select():
         returns childnode with maximal UCB1 value otherwise
 
     """
-    from agents.agent_montecarlo.monte_carlo import MonteCarlo
     from agents.agent_montecarlo.monte_carlo_node import MonteCarloNode
 
     mcst = tt.create_empty_tree()
@@ -80,6 +61,7 @@ def test_select():
     for child in mcst.root.children:
         ucb[child] = mcst.root.children[child].UCB1(explore_param=np.sqrt(2))
     assert ret.last_action == np.argmax(ucb)
+
 
 def test_simulate():
     """
@@ -134,6 +116,7 @@ def test_backprop_small():
         else:
             assert n_w_after[i] == n_w[i]+1
 
+
 def test_backprop_sim():
 
     # build a bigger example tree
@@ -164,6 +147,7 @@ def test_backprop_sim():
         else:
             assert n_w_after[i] == n_w[i]+1
 
+
 def test_best_action():
     """
     Tests best_action by checking if it correctly chooses the childnode with
@@ -185,5 +169,123 @@ def test_best_action():
         n_sim[child] = mcst.root.children[child].n_simulations
     assert ret == np.argmax(n_sim)
 
+
 def test_run_search():
-    run_search(timeout = 1)
+    mcst = tt.create_empty_tree()
+    mcst.run_search(timeout=1)
+
+    #
+
+
+def test_generate_move():
+    """
+    Test generate_move function of montecarlo agent of the following:
+        - return is Tuple of (PlayerAction, MonteCarlo)
+        - returned column is in range of board
+        - returned column is not full
+        - if new root in search tree is correctly assigned for saved state
+
+    """
+    from agents.agent_montecarlo import generate_move
+
+    board = TestBoards.board_test_4
+    player = PLAYER2
+    action_opponent = 3
+    mcst, _, _ = tt.simulate_tree()
+    saved_state = {PLAYER1: action_opponent, PLAYER2: mcst}
+
+    old_root = mcst.root
+    action, new_mcts = generate_move(board, player, saved_state)
+    new_root = old_root.children[action_opponent].children[action]
+
+    assert new_mcts.root == new_root
+    assert new_mcts.root.n_simulations == new_root.n_simulations
+    assert new_mcts.root.n_wins == new_root.n_wins
+    assert np.all(new_mcts.root.board == new_root.board)
+
+    assert isinstance(action, PlayerAction)
+    assert isinstance(new_mcts, MonteCarlo)
+    assert action in np.arange(0, board.shape[1], 1)
+    assert board[board.shape[0]-1, action] == NO_PLAYER
+
+
+def test_generate_move_win():
+    """
+    Tests if generate move takes direct win and blocks direct loss in next
+    round by using a simple example board of the TestBoards class.
+    """
+    from agents.agent_montecarlo import generate_move
+
+    # test if takes the win if possible
+    player = PLAYER1
+    saved_state = {PLAYER1: None, PLAYER2: None}
+    action, mcst = generate_move(TestBoards.board_mc1, player, saved_state)
+    assert action == 3
+
+    saved_state = {PLAYER1: None, PLAYER2: None}
+    player = PLAYER2
+    action, mcst = generate_move(TestBoards.board_mc1, player, saved_state)
+    assert action == 3
+
+
+def test_generate_move_direct_win():
+    """
+    Tests if generate move takes direct win and blocks direct loss in next
+    round by using a simple example board of the TestBoards class.
+    """
+    from agents.agent_montecarlo import generate_move
+
+    # test if takes the win if possible
+    player = PLAYER1
+    saved_state = {PLAYER1: None, PLAYER2: None}
+    action, mcst = generate_move(TestBoards.board_mc1, player, saved_state)
+    assert action == 3
+
+    saved_state = {PLAYER1: None, PLAYER2: None}
+    player = PLAYER2
+    action, mcst = generate_move(TestBoards.board_mc1, player, saved_state)
+    assert action == 3
+
+
+
+
+
+
+
+
+
+def test_generate_move_sampleboards():
+    """
+    Test function max_player_move by checking generated moves for the
+    following example boards.
+    """
+    from agents.agent_montecarlo import generate_move
+
+
+# assert if max agent plays 1 or 4 to prevent win of min agent in second
+    # next move
+    board = TestBoards.board_minimax_depth2
+    print(TestBoards.minimax_depth2)
+
+    player = PLAYER1
+    saved_state = {PLAYER1: 5, PLAYER2: None}
+    action, mcst = generate_move(board, player, saved_state)
+    print(action)
+    assert action == 1 or action == 4
+
+    # assert if max agent plays 1 to prevent win of min agent in next move
+    board = TestBoards.board_minimax_2
+    print(TestBoards.minimax_2)
+    saved_state = {PLAYER1: 5, PLAYER2: None}
+    action, mcst = generate_move(board, player, saved_state)
+    print(action)
+    assert action == 1
+
+    # assert if max agent plays 1 to win
+    board = TestBoards.board_minimax_2
+    player = PLAYER2
+    print(TestBoards.minimax_2)
+    saved_state = {PLAYER1: 5, PLAYER2: None}
+    action, mcst = generate_move(board, player, saved_state)
+    print(action)
+    assert action == 1

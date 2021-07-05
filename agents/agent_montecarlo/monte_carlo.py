@@ -1,13 +1,9 @@
 import numpy as np
 import time
-from agents.common import BoardPiece, SavedState, PlayerAction, \
-    apply_player_action, connected_four, change_player, valid_action, \
-    connected_n, GameState, check_end_state
-
+from agents.common import BoardPiece, PlayerAction, apply_player_action, \
+    connected_four, change_player, valid_action
 from agents.agent_montecarlo.monte_carlo_node import MonteCarloNode
 
-
-#TODO: bias towards left - shuffle before
 
 def generate_move(board: np.ndarray,
                   player: BoardPiece,
@@ -47,9 +43,7 @@ def generate_move(board: np.ndarray,
         print(mcst)
         mcst.root = mcst.root.children[action_opponent]
 
-    # TODO: function direct wins/prevent wins:
-
-    mcst.run_search(timeout=3)
+    mcst.run_search(timeout=2)
     action = mcst.best_action()
     mcst.root = mcst.root.children[action]
 
@@ -73,11 +67,6 @@ class MonteCarlo:
         self.explore_param = explore_param
         self.root = MonteCarloNode(None, board, player, None)
 
-        #self.selected_node
-        #self.sim_node = self.root
-        #self.winner = None
-
-
     def run_search(self, timeout: int = 1):
         """
         From given node, repeatedly run the Monte Carlo tree search to build
@@ -97,16 +86,20 @@ class MonteCarlo:
             selected_node = self.select(self.root)
 
             # phase 2 - EXPANSION
-            # TODO: expand direct wins?
-            action_expansion = np.random.choice(selected_node.
-                                                unexpanded_actions())
-            new_node = selected_node.expand(action_expansion)
+            if not selected_node.is_won:
 
-            # phase 3 - SIMULATION:
-            winner = self.simulate(new_node)
+                action_expansion = np.random.choice(selected_node.unexpanded_actions())
+                expanded_node = selected_node.expand(action_expansion)
+
+                # phase 3 - SIMULATION:
+                winner = self.simulate(expanded_node)
+
+            else:
+                expanded_node = selected_node
+                winner = change_player(selected_node.player)
 
             # phase 4 - BACKPROPAGATION:
-            self.backprop(new_node, winner)
+            self.backprop(expanded_node, winner)
 
     def select(self, node: MonteCarloNode):
         """
@@ -133,6 +126,7 @@ class MonteCarlo:
 
         for action, child_node in node.children.items():
             ucb = child_node.UCB1(self.explore_param)
+
             if ucb > maximum:
                 maximum = ucb
                 selected_child = child_node
@@ -156,19 +150,21 @@ class MonteCarlo:
         """
 
         board = node.board
-        player = node.player
+        player = change_player(node.player)
         last_action = node.last_action
 
         # while game is not won
-        while not connected_four(board, change_player(player), last_action):
-            try: action = np.random.choice(valid_action(board))
-            except: return None
+        while not connected_four(board, player, last_action):
+            try:
+                action = np.random.choice(valid_action(board))
+            except:
+                return None
 
-            board = apply_player_action(board, action, player, copy=True)
             player = change_player(player)
+            board = apply_player_action(board, action, player, copy=True)
             last_action = action
 
-        return BoardPiece(change_player(player))
+        return BoardPiece(player)
 
     def backprop(self, node: MonteCarloNode, winner: BoardPiece):
         """
@@ -182,8 +178,9 @@ class MonteCarlo:
             node for which the simulation was run - starting point of backprop
         winner: BoardPiece
         """
+
+        node.n_simulations += 1
         if node.parent is not None:
-            node.n_simulations += 1
             if winner is not None:
                 # unequality because each node’s statistics are used for its
                 # parent node’s choice, not its own
@@ -199,7 +196,7 @@ class MonteCarlo:
 
         Parameters
         ----------
-        n_mode: str
+        mode: str
             'n_wins': selects child with most wins
             'n_simulations': selects child that was simulated the most
 
@@ -213,12 +210,13 @@ class MonteCarlo:
 
         if not node.is_fully_expanded():
             print('not fully expanded')
-            return 3
+            return PlayerAction(3)
 
         if mode == 'n_wins':
             for action in node.children:
                 child_node = node.children[action]
-                print('action: ', action,'n wins: ', child_node.n_wins)
+                print('action: ', action, 'n wins: ', child_node.n_wins)
+                print('action: ', action, 'n sim: ', child_node.n_simulations)
                 if child_node.n_wins > maximum:
                     maximum = child_node.n_wins
                     player_action = PlayerAction(action)
@@ -226,21 +224,10 @@ class MonteCarlo:
         elif mode == 'n_sim':
             for action in node.children:
                 child_node = node.children[action]
-                print('action: ', action,'n sim: ', child_node.n_simulations)
+                print('action: ', action, 'n sim: ', child_node.n_simulations)
+                print('action: ', action, 'n wins: ', child_node.n_wins)
                 if child_node.n_simulations > maximum:
-                        maximum = child_node.n_simulations
-                        player_action = PlayerAction(action)
+                    maximum = child_node.n_simulations
+                    player_action = PlayerAction(action)
 
         return PlayerAction(player_action)
-
-# TODO: check if all children are expanded, otherwise not enough
-        #  information (MonteCarloNode.is_fully_expanded())
-        #if not node.is_fully_expanded():
-        #    print('not fully expanded')
-        #    return 3
-#board_new = apply_player_action(node.board, action,
-            #                                node.player, copy=True)
-            #if connected_four(board_new, node.player, action):
-            #    return action
-            #elif connected_n(board_new, node.player, action, 3):
-

@@ -1,8 +1,7 @@
 import numpy as np
 from agents.common import apply_player_action, change_player, valid_action, \
     PlayerAction, BoardPiece, connected_four
-#from agents.agent_montecarlo.monte_carlo import valid_action
-#from numba import njit
+
 
 class MonteCarloNode(object):
 
@@ -30,7 +29,7 @@ class MonteCarloNode(object):
         # Monte Carlo attributes
         self.n_simulations = 0
         self.n_wins = 0
-        self.is_win = False
+        self.is_won = False
 
         # Tree attributes
         self.parent = parent
@@ -57,18 +56,20 @@ class MonteCarloNode(object):
         self.children[action]: MonteCarloNode
             expanded child node
         """
-        new_board = apply_player_action(self.board,
-                                        action,
-                                        self.player,
-                                        copy=True)
-        self.children[action] = MonteCarloNode(self,
-                                               new_board,
-                                               change_player(self.player),
-                                               PlayerAction(action))
-        # TODO: test connected_four thing
-        #if connected_four(new_board, self.player, action):
-        #    self.children[action].is_win = True
-        #    self.children[action].children = {}
+
+        if not self.is_won:
+            new_board = apply_player_action(self.board,
+                                            action,
+                                            self.player,
+                                            copy=True)
+            self.children[action] = MonteCarloNode(self,
+                                                   new_board,
+                                                   change_player(self.player),
+                                                   PlayerAction(action))
+
+            if connected_four(new_board, self.player, action):
+
+                self.children[action].is_won = True
 
         return self.children[action]
 
@@ -90,17 +91,18 @@ class MonteCarloNode(object):
 
     def is_fully_expanded(self):
         """
-        Returns whether current node is fully expanded, e.g all child nodes
-        are not None.
+        Returns whether current node cannot be further expanded, e.g all
+        child nodes are not None.
 
         Returns
         -------
         boolean
         """
+
         if any(np.array(list(self.children.values())) == None):
             return False
-        else:
-            return True
+
+        return True
 
     def UCB1(self, explore_param: float) -> float:
         """
@@ -109,7 +111,7 @@ class MonteCarloNode(object):
         of the parent node, to generate the UCB1 values for each child node
         according to:
 
-            ucb1 = wᵢ / sᵢ + c * sqrt(ln(sₚ) / sᵢ )
+            ucb1 = (wᵢ / sᵢ) + c * sqrt(ln(sₚ) / sᵢ )
 
             wᵢ : this node’s number of simulations that resulted in a win
                 (self.n_wins)
@@ -137,21 +139,3 @@ class MonteCarloNode(object):
             return exploitation + explore_param * exploration
         else:
             return np.random.randint(-5, 5)
-
-
-
-
-
-
-    # Whether this node is terminal in the game tree, check if INCLUSIVE
-    # of termination due to winning because no children created
-    # TODO: optimization: use this instead of checking for win again in
-    #  run_sim monte
-    #  carlo?
-
-    def is_leaf(self):
-        if len(self.children) == 0:
-            return True
-        return False
-
-

@@ -1,10 +1,7 @@
 import numpy as np
-
-from agents.common import NO_PLAYER, PLAYER1, \
-    PLAYER2, initialize_game_state, PlayerAction, \
-    PLAYER2_PRINT, PLAYER1_PRINT, valid_action
-from tests.test_trees import TestTrees
+from agents.common import PLAYER1, PLAYER2, initialize_game_state
 import tests.test_trees as tt
+
 
 def test_init():
     """
@@ -46,6 +43,8 @@ def test_expand():
     root.expand(action)
     assert isinstance(root.children[action], MonteCarloNode)
 
+    # test if only expand if not leaf and not win!
+
 
 def test_unexpanded_actions():
     """
@@ -76,7 +75,6 @@ def test_is_fully_expanded():
         ... after expanding all childnodes of the root node is_fully_expanded()
             returns true
     """
-    from agents.agent_montecarlo.monte_carlo_node import MonteCarloNode
     root = tt.create_root()
     ret = root.is_fully_expanded()
     assert isinstance(ret, bool)
@@ -110,5 +108,4 @@ def test_UCB1():
                                             action].n_simulations)
         print(f'{action}. parent.n_simulations: ', node.n_simulations)
         print(f'{action}. ucb1: ', ret)
-        assert ret == ((w_i / s_i) + c * np.sqrt(np.log(s_p) / s_i ))
-
+        assert ret == ((w_i / s_i) + c * np.sqrt(np.log(s_p) / s_i))

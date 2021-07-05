@@ -150,3 +150,16 @@ class TestBoards:
                       '|0 1 2 3 4 5 6|'
 
     board_win_player1 = string_to_board(str_win_player1)
+
+
+    mc1 = '|=============|\n' \
+                   '|             |\n' \
+                   '|             |\n' \
+                   '|             |\n' \
+                   '|             |\n' \
+                   '|             |\n' \
+                   '|X X X        |\n' \
+                   '|=============|\n' \
+                   '|0 1 2 3 4 5 6|'
+
+    board_mc1 = string_to_board(mc1)

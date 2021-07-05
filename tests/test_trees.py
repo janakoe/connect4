@@ -65,7 +65,7 @@ class TestTrees:
     #    n_wins = np.random.randint(0, 10)
     #    n_sim = np.random.randint(1, 5)
      #   root_ucb.children[action].n_wins = n_wins
-     #   root_ucb.children[action].n_simulations = n_wins + n_sim
+     #    root_ucb.children[action].n_simulations = n_wins + n_sim
 
     #simulated_tree = simulate_tree()
 

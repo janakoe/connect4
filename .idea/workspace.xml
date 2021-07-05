@@ -26,15 +26,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f20ee67a-75d5-4ef0-8d03-d94a8f84b0db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/test_trees.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/agents/agent_montecarlo/monte_carlo.py" beforeDir="false" afterPath="$PROJECT_DIR$/agents/agent_montecarlo/monte_carlo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/agents/agent_montecarlo/monte_carlo_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/agents/agent_montecarlo/monte_carlo_node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agents/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/agents/common.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/agent_montecarlo/test_monte_carlo" beforeDir="false" afterPath="$PROJECT_DIR$/tests/agent_montecarlo/test_monte_carlo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/agent_montecarlo/test_monte_carlo.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/agent_montecarlo/test_monte_carlo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/agent_montecarlo/test_monte_carlo_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/agent_montecarlo/test_monte_carlo_node.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_boards.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_boards.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_trees.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_trees.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +65,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
   </component>
-  <component name="RunManager" selected="Python tests.pytest for test_monte_carlo.test_best_action">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="connect4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -89,22 +87,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_monte_carlo_node.test_unexpanded_actions" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="connect4" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agent_montecarlo" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_monte_carlo_node.test_unexpanded_actions&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="pytest for test_monte_carlo.test_best_action" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="connect4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -121,7 +103,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_monte_carlo.test_simulate" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_monte_carlo.test_generate_move" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="connect4" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -133,7 +115,39 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_monte_carlo.test_simulate&quot;" />
+      <option name="_new_target" value="&quot;test_monte_carlo.test_generate_move&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_monte_carlo.test_generate_move_0" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="connect4" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agent_montecarlo" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_monte_carlo.test_generate_move_0&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_monte_carlo.test_generate_move_win" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="connect4" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agent_montecarlo" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_monte_carlo.test_generate_move_win&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -153,29 +167,13 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in test_monte_carlo.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="connect4" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agent_montecarlo" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/agent_montecarlo/test_monte_carlo.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.pytest for test_monte_carlo.test_generate_move_0" />
+        <item itemvalue="Python tests.pytest for test_monte_carlo.test_generate_move_win" />
+        <item itemvalue="Python tests.pytest for test_monte_carlo.test_generate_move" />
         <item itemvalue="Python tests.pytest for test_monte_carlo.test_best_action" />
         <item itemvalue="Python tests.pytest in test_monte_carlo_node.py" />
-        <item itemvalue="Python tests.pytest in test_monte_carlo.py" />
-        <item itemvalue="Python tests.pytest for test_monte_carlo.test_simulate" />
-        <item itemvalue="Python tests.pytest for test_monte_carlo_node.test_unexpanded_actions" />
       </list>
     </recent_temporary>
   </component>
@@ -209,7 +207,8 @@
     <MESSAGE value="docstrings and minor changes 19.05" />
     <MESSAGE value="first draft monte carlo" />
     <MESSAGE value="first version with saved gamestate - still bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="first version with saved gamestate - still bugs" />
+    <MESSAGE value="tests and docstrings" />
+    <option name="LAST_COMMIT_MESSAGE" value="tests and docstrings" />
   </component>
   <component name="WindowStateProjectService">
     <state x="233" y="0" key="#Intentions" timestamp="1620846348063">
@@ -232,28 +231,28 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="427" y="241" key="Git.Rebase.Log.Action.NewCommitMessage.Dialog/0.0.1280.680@0.0.1280.680" timestamp="1624224017904" />
-    <state width="1106" height="521" key="GridCell.Tab.0.bottom" timestamp="1625176662172">
+    <state width="1105" height="192" key="GridCell.Tab.0.bottom" timestamp="1625502063663">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1106" height="521" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625176662172" />
+    <state width="1105" height="192" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625502063663" />
     <state width="1259" height="302" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1621285218098" />
     <state width="1259" height="551" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1625157395696" />
-    <state width="1106" height="521" key="GridCell.Tab.0.center" timestamp="1625176662172">
+    <state width="1105" height="192" key="GridCell.Tab.0.center" timestamp="1625502063663">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1106" height="521" key="GridCell.Tab.0.center/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625176662172" />
+    <state width="1105" height="192" key="GridCell.Tab.0.center/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625502063663" />
     <state width="1259" height="302" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1621285218098" />
     <state width="1259" height="551" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1625157395696" />
-    <state width="1106" height="521" key="GridCell.Tab.0.left" timestamp="1625176662172">
+    <state width="1105" height="192" key="GridCell.Tab.0.left" timestamp="1625502063663">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1106" height="521" key="GridCell.Tab.0.left/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625176662172" />
+    <state width="1105" height="192" key="GridCell.Tab.0.left/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625502063663" />
     <state width="1259" height="302" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1621285218098" />
     <state width="1259" height="551" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1625157395696" />
-    <state width="1106" height="521" key="GridCell.Tab.0.right" timestamp="1625176662172">
+    <state width="1105" height="192" key="GridCell.Tab.0.right" timestamp="1625502063663">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1106" height="521" key="GridCell.Tab.0.right/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625176662172" />
+    <state width="1105" height="192" key="GridCell.Tab.0.right/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625502063663" />
     <state width="1259" height="302" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1621285218098" />
     <state width="1259" height="551" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1625157395696" />
     <state width="1259" height="88" key="GridCell.Tab.1.bottom" timestamp="1621255237505">
@@ -276,16 +275,16 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="110" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1621457813053" />
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1625064596529">
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1625179326498">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625064596529" />
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625179326498" />
     <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1621285211442" />
     <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1624223936717" />
-    <state x="1920" y="-374" width="1042" height="629" maximized="true" key="dock-window-1" timestamp="1625175791312">
+    <state x="1795" y="-329" width="1040" height="594" maximized="true" key="dock-window-1" timestamp="1625476066726">
       <screen x="1920" y="-1080" width="1080" height="1880" />
     </state>
-    <state x="1920" y="-374" width="1042" height="629" maximized="true" key="dock-window-1/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625175791312" />
+    <state x="1795" y="-329" width="1040" height="594" maximized="true" key="dock-window-1/0.0.1280.680/1920.-1080.1080.1880@0.0.1280.680" timestamp="1625476066726" />
     <state x="180" y="312" width="719" height="302" key="dock-window-1/0.0.1280.680@0.0.1280.680" timestamp="1625148315018" />
     <state x="213" y="0" width="1078" height="687" key="dock-window-2" timestamp="1625148315018">
       <screen x="0" y="0" width="1280" height="680" />

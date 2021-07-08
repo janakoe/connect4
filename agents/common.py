@@ -164,7 +164,6 @@ def apply_player_action(board: np.ndarray,
     raise NameError(f'action {action} not possible')
 
 
-
 @njit()
 def connected_four(board: np.ndarray,
                    player: BoardPiece,
@@ -474,6 +473,17 @@ def change_player(player: BoardPiece) -> BoardPiece:
     return PLAYER1
 
 
-def valid_action(board: np.ndarray):
-    return np.argwhere(board[-1, :] == NO_PLAYER).flatten()
+def valid_action(board: np.ndarray) -> np.ndarray:
+    """
+    Returns valid actions of the given board, e.g. all columns that are not
+    full.
 
+    Parameters
+    ----------
+    board: np.ndarray
+        current game board
+    Returns
+    -------
+    np.array of valid columns
+    """
+    return np.argwhere(board[-1, :] == NO_PLAYER).flatten()

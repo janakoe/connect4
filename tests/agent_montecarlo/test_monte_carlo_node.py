@@ -25,7 +25,7 @@ def test_init():
     assert ret.parent is None
     assert len(ret.children) == 7
 
-    # check if all childnodes are None
+    # check if all child nodes are None
     for key in ret.children:
         assert not ret.children[key]
 
@@ -49,9 +49,9 @@ def test_expand():
 def test_unexpanded_actions():
     """
     Checks if ...
-        ... unexpanded_actions() returns list of all actions for root node
+        ... unexpanded_actions() returns list of all actions for a root node
             without expanded children
-        ... after expanding a random childnode the corresponding action is
+        ... after expanding a random child node, the corresponding action is
             not included in the returned list
     """
 
@@ -69,11 +69,10 @@ def test_unexpanded_actions():
 
 def test_is_fully_expanded():
     """
-    Checks if ...
-        ... is_fully_expanded() returns false for root node without expanded
+    Checks if is_fully_expanded() returns
+        ... false for root node without expanded
             children
-        ... after expanding all childnodes of the root node is_fully_expanded()
-            returns true
+        ... true after expanding all child nodes of the root node
     """
     root = tt.create_root()
     ret = root.is_fully_expanded()
@@ -82,12 +81,11 @@ def test_is_fully_expanded():
 
     for action in range(7):
         root.expand(action)
-
     ret = root.is_fully_expanded()
     assert ret
 
 
-def test_UCB1():
+def test_ucb1():
     """
     Tests implementation of UCB1 algorithm for children of node created in
     TestTrees.

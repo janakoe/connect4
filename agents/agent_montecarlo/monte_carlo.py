@@ -20,7 +20,7 @@ def generate_move(board: np.ndarray,
         player for whom a move is generated
     saved_state: dict
         saved states for both players in form: {PLAYER1: ..., PLAYER2: ...}
-        whereby the value for montecarlo player is type MonteCarlo and for
+        whereby the value for the Monte Carlo player is type MonteCarlo and for
         the other player is int.
 
     Returns
@@ -29,7 +29,6 @@ def generate_move(board: np.ndarray,
         column to be played
     mcst: MonteCarlo
         MonteCarlo object with root node at the selected action
-
     """
 
     # create new monte carlo search tree:
@@ -40,7 +39,6 @@ def generate_move(board: np.ndarray,
     else:
         action_opponent = saved_state[change_player(player)]
         mcst = saved_state[player]
-        print(mcst)
         mcst.root = mcst.root.children[action_opponent]
 
     mcst.run_search(timeout=2)
@@ -64,6 +62,7 @@ class MonteCarlo:
         explore_param: float
             explore parameter for UCB1 algorithm
         """
+
         self.explore_param = explore_param
         self.root = MonteCarloNode(None, board, player, None)
 
@@ -76,11 +75,13 @@ class MonteCarlo:
         ----------
         timeout: int
             simulation time in seconds
-
         """
+
+        # count = 0
 
         end = time.time() + timeout
         while time.time() < end:
+            # count += 1
 
             # phase 1 - SELECTION:
             selected_node = self.select(self.root)
@@ -99,29 +100,30 @@ class MonteCarlo:
                 winner = change_player(selected_node.player)
 
             # phase 4 - BACKPROPAGATION:
-            self.backprop(expanded_node, winner)
+            self.backpropagation(expanded_node, winner)
+
+        # print('number simulations: ', count)
 
     def select(self, node: MonteCarloNode):
         """
-        Recursively select childnode following the UCB1 algorithm until
+        Recursively select child node following the UCB1 algorithm until
         reached node is not fully expanded.
 
         Parameters
         ----------
         node: MonteCarloNode
-            node from which to select a childnode
+            node from which to select a child node
 
         Returns
         -------
-        childnode: MonteCarloNode
-            selected childnode
-
+        selected child node: MonteCarloNode
         """
 
         if not node.is_fully_expanded():
             return node
 
-        selected_child = None
+        selected_child = node.children[np.random.choice(valid_action(
+                         node.board))]
         maximum = np.NINF
 
         for action, child_node in node.children.items():
@@ -141,7 +143,7 @@ class MonteCarlo:
         Parameters
         ----------
         node: MonteCarloNode
-            node from which to select a childnode
+            node from which to select a child node
 
         Returns
         -------
@@ -158,6 +160,7 @@ class MonteCarlo:
             try:
                 action = np.random.choice(valid_action(board))
             except:
+                # simulated game ends drawn
                 return None
 
             player = change_player(player)
@@ -166,16 +169,16 @@ class MonteCarlo:
 
         return BoardPiece(player)
 
-    def backprop(self, node: MonteCarloNode, winner: BoardPiece):
+    def backpropagation(self, node: MonteCarloNode, winner: BoardPiece):
         """
-        Backpropagates simulated win, e.g updates all ancestor statics
-        starting from the simulation node by recursivly calling the backprop
-        function.
+        Back propagate  simulated win, e.g updates all ancestor statics
+        starting from the simulation node by recursively calling the
+        backpropagation function.
 
         Parameters
         ----------
         node: MonteCarloNode
-            node for which the simulation was run - starting point of backprop
+            node for which the simulation was run - starting point of backpropagation
         winner: BoardPiece
         """
 
@@ -186,48 +189,41 @@ class MonteCarlo:
                 # parent node’s choice, not its own
                 if node.player != winner:
                     node.n_wins += 1
-            self.backprop(node.parent, winner)
+            self.backpropagation(node.parent, winner)
 
-    def best_action(self, mode: str = 'n_wins') -> PlayerAction:
+    def best_action(self, visualise=False) -> PlayerAction:
         """
         Chooses the best action for the current player according to the
-        Monte Carlo Tree, e.g selects the childnode that has the most number
+        Monte Carlo Tree, e.g selects the child node that has the most number
         of wins or simulations depending on mode.
 
         Parameters
         ----------
-        mode: str
-            'n_wins': selects child with most wins
-            'n_simulations': selects child that was simulated the most
+        visualise:
+            whether or not to print number of wins and number of simulations
+            of all children
 
         Returns
         -------
         player_action: PlayerAction
             best column to play according to Monte Carlo Tree search
         """
-        node = self.root
+        root = self.root
         maximum = np.NINF
 
-        if not node.is_fully_expanded():
-            print('not fully expanded')
-            return PlayerAction(3)
+        while not self.root.is_fully_expanded():
+            # print('root was not fully expanded - extra simulation')
+            self.run_search(timeout=1)
 
-        if mode == 'n_wins':
-            for action in node.children:
-                child_node = node.children[action]
+        for action in root.children:
+            child_node = root.children[action]
+
+            if visualise:
                 print('action: ', action, 'n wins: ', child_node.n_wins)
                 print('action: ', action, 'n sim: ', child_node.n_simulations)
-                if child_node.n_wins > maximum:
-                    maximum = child_node.n_wins
-                    player_action = PlayerAction(action)
 
-        elif mode == 'n_sim':
-            for action in node.children:
-                child_node = node.children[action]
-                print('action: ', action, 'n sim: ', child_node.n_simulations)
-                print('action: ', action, 'n wins: ', child_node.n_wins)
-                if child_node.n_simulations > maximum:
-                    maximum = child_node.n_simulations
-                    player_action = PlayerAction(action)
+            if child_node.n_wins > maximum:
+                maximum = child_node.n_wins
+                player_action = PlayerAction(action)
 
         return PlayerAction(player_action)

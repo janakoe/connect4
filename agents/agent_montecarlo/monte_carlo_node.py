@@ -16,7 +16,7 @@ class MonteCarloNode(object):
         board: np.ndarray
             game board belonging to node
         player: BoardPiece
-            player who chooses action from childnodes of current node
+            player who chooses action (child node of current node)
         last_action: PlayerAction
             action that led to this node
         """
@@ -35,8 +35,8 @@ class MonteCarloNode(object):
         self.parent = parent
         self.children = {}
 
-        # dict for children nodes for all valid actions in form:
-        # {action: childnode} and sets all childnodes to None (unexpanded)
+        # dict for children nodes for all valid actions: {action: child_node}
+        # all child nodes are set to None (unexpanded node)
         for move in valid_action(self.board):
             self.children[move] = None
 
@@ -84,10 +84,10 @@ class MonteCarloNode(object):
 
         """
 
-        childnodes = np.array(list(self.children.values()))
+        child_nodes = np.array(list(self.children.values()))
         actions = np.array(list(self.children.keys()))
 
-        return actions[np.argwhere(childnodes == None)[:, 0]]
+        return actions[np.argwhere(child_nodes == None)[:, 0]]
 
     def is_fully_expanded(self):
         """
@@ -106,7 +106,7 @@ class MonteCarloNode(object):
 
     def UCB1(self, explore_param: float) -> float:
         """
-        Function implements the UCB1 algotithm, it uses the numbers of wins
+        Function implements the UCB1 algorithm, it uses the numbers of wins
         and simulations of the children nodes, and the number of simulations
         of the parent node, to generate the UCB1 values for each child node
         according to:
